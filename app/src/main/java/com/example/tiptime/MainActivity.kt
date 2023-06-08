@@ -21,11 +21,13 @@ import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -72,7 +74,7 @@ fun TipTimeLayout() {
     var tipInput by remember { mutableStateOf("") }
     val tipPercent = tipInput.toDoubleOrNull() ?: 0.0
 
-    val tip = calculateTip(amount,tipPercent)
+    val tip = calculateTip(amount, tipPercent)
 
 
 
@@ -89,9 +91,9 @@ fun TipTimeLayout() {
         )
         EditNumberField(
             label = R.string.bill_amount,
-            KeyboardOptions.Default.copy(
-              keyboardType = KeyboardType.Number,
-              imeAction = ImeAction.Next
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Next
             ),
             value = amountInput,
             onValueChanged = { amountInput = it },
@@ -101,12 +103,12 @@ fun TipTimeLayout() {
         )
         EditNumberField(
             label = R.string.how_was_the_service,
-            KeyboardOptions.Default.copy(
+            keyboardOptions = KeyboardOptions.Default.copy(
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Done
             ),
             value = tipInput,
-            onValueChanged = { tipInput = it},
+            onValueChanged = { tipInput = it },
             modifier = Modifier
                 .padding(bottom = 32.dp)
                 .fillMaxWidth()
@@ -133,8 +135,18 @@ fun EditNumberField(
         modifier = modifier,
         onValueChange = onValueChanged,
         label = { Text(stringResource(label)) },
-        keyboardOptions = KeyboardOptions.Default
+        keyboardOptions = keyboardOptions
     )
+}
+@Composable
+fun RoundTheTipRow(modifier: Modifier = Modifier){
+    Row(modifier = modifier
+        .fillMaxWidth()
+        .size(48.dp),
+        verticalAlignment = Alignment.CenterVertically
+        ) {
+
+    }
 }
 
 /**
